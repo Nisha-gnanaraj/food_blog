@@ -1,0 +1,35 @@
+<div class="container">
+<div class="col-lg-12">
+  <div class=" box-shadow">
+  <% @articles.each do |article| %>
+    <div class="mb-3 d-flex align-items-center">
+    <% if article.avatar? %>
+    <%= image_tag(article.avatar_url , :class=>"av_image" )%>
+    <%end%>  
+    <div class="pl-3">
+        <h2 class="mb-2 h6 font-weight-bold">
+        <a class="text-dark"><%= article.title %></a>
+        </h2>
+        <div class="card-text text-muted small">
+            <%= article.text %>
+            <%= link_to 'Read More', article_path(article) %>
+        </div>
+        <small class="text-muted"><%=article.created_at.strftime("%b %d") %>
+        <% if user_signed_in? %>
+         . <%= link_to 'Destroy', article_path(article),
+        method: :delete,
+        data: { confirm: 'Are you sure?' } %> | <%= link_to 'Edit', edit_article_path(article) %></small>
+      <%end%>
+        </div>
+    </div>
+  <%end%>  
+  </div>
+  <div class="btn-center">
+  <% if user_signed_in? %>
+    <%= link_to 'New article', new_article_path , :class=>"btn btn-primary"%>
+  <%else%>
+  <%= link_to "New article", new_user_session_path, :class => 'btn btn-primary'  %>
+  <%end%>  
+  </div>
+  </div>
+</div>

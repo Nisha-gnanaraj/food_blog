@@ -1,0 +1,30 @@
+<div class="container"><p>
+  <strong>Title:</strong>
+  <%= @article.title %>
+</p>
+ 
+<p>
+  <strong>Text:</strong>
+  <%= @article.text %>
+</p>
+<div class="card">
+  <div class="container">
+  <h5><strong>Comments</strong></h5>
+  <%= render @article.comments %>
+  <p><strong>Add a comment:</strong></p>
+  <% if user_signed_in? %>
+    <%= render 'comments/form' %> 
+  <%else%>
+  <p>
+  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+          <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+  <%end%>  to add comments to the posts
+  </p> 
+  </div>
+</div>
+
+<div class="">                                                                                                                                                                                                                                                    
+<%= link_to 'Edit', edit_article_path(@article) %> |
+<%= link_to 'Back', articles_path %>
+</div>
+</div>
